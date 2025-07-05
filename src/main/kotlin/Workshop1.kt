@@ -16,17 +16,35 @@ fun main() {
         // 2. รับข้อมูลตัวเลือกจากผู้ใช้
         val choice = readln()
 
+        when (choice) {
+            "1" -> convertCelsiusToFahrenheit()
+            "2" -> convertKilometersToMiles()
+            "Exit" -> {
+                print("ออกจากโปรแกรม...")
+                break
+            }
+            "exit" -> {
+                print("ออกจากโปรแกรม...")
+                break
+            }
+            else -> println("ตัวเลือกไม่ถูกต้อง โปรดลองอีกครั้ง")
+        }
         // 3. ควบคุมการทำงานด้วย when expression
         // เลือก 1 เพื่อแปลง Celsius เป็น Fahrenheit: convertCelsiusToFahrenheit()
         // เลือก 2 เพื่อแปลง Kilometers เป็น Miles: convertKilometersToMiles()
         // เลือก 'exit' เพื่อออกจากโปรแกรม
         // 🚨
-
-
         println() // พิมพ์บรรทัดว่างเพื่อความสวยงาม
     }
 }
 
+fun celsiusToFahrenheit(celsius: Double) : Double {
+    return celsius * 9.0 / 5 + 32.0
+}
+
+fun kilometersToMiles(kilometers : Double) : Double {
+    return kilometers * 0.621371
+}
 // 4. สร้างฟังก์ชันแยกสำหรับการแปลงหน่วย Celsius to Fahrenheit: celsiusToFahrenheit
 // สูตร celsius * 9.0 / 5.0 + 32
 // 🚨
@@ -41,15 +59,19 @@ fun main() {
 fun convertCelsiusToFahrenheit() {
     print("ป้อนค่าองศาเซลเซียส (Celsius): ")
     val input = readln()
+    val celsius = input.toDoubleOrNull() ?: run {
+        println("ข้อมูลไม่ถูกต้อง โปรดป้อนตัวเลขสำหรับองศาเซลเซียส")
+        return
+    }
+
+    val fahrenheitResult = celsiusToFahrenheit(celsius)
+    println("ผลลัพธ์ : $celsius °C เท่ากับ ${"%.2f".format(fahrenheitResult)}°F")
 
     // 5. จัดการ Null Safety ด้วย toDoubleOrNull() และ Elvis operator (?:)
     // ออกจากฟังก์ชัน convertCelsiusToFahrenheit() หากข้อมูลผิดพลาด: return
     // celsius
     // 🚨
-
-
 //🚨    val fahrenheitResult = celsiusToFahrenheit(celsius)
-
     // 6. แสดงผลลัพธ์
     // ใช้ String format เพื่อแสดงทศนิยม 2 ตำแหน่ง
 //🚨    println("ผลลัพธ์: $celsius °C เท่ากับ ${"%.2f".format(fahrenheitResult)} °F")
@@ -59,13 +81,17 @@ fun convertCelsiusToFahrenheit() {
 fun convertKilometersToMiles() {
     print("ป้อนค่ากิโลเมตร (Kilometers): ")
     val input = readln()
+    val kilometers = input.toDoubleOrNull() ?: run {
+        println("ข้อมูลไม่ถูกต้อง โปรดป้อนตัวเลขสำหรับกิโลเมตร")
+        return
+    }
 
+    val milesResult = kilometersToMiles(kilometers)
+    println("ผลลัพธ์: $kilometers km เท่ากับ ${"%.2f".format(milesResult)} miles")
     // 5. จัดการ Null Safety ด้วย toDoubleOrNull() และ Elvis operator (?:)
     // ออกจากฟังก์ชัน convertKilometersToMiles() หากข้อมูลผิดพลาด: return
     // kilometers
     // 🚨
-
-
 //🚨    val milesResult = kilometersToMiles(kilometers)
 
     // 6. แสดงผลลัพธ์
